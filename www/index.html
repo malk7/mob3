@@ -64,6 +64,8 @@
         <!-- normalizes device and document ready events, see file for details -->
         <script type="application/javascript" src="lib/jquery.min.js"></script>
         <script type="application/javascript" src="jqm/jquery.mobile-min.js" data-ver="0"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+        <script type="application/javascript" src="xdk/ad/jqm_subpage.js"></script>
     </head>
 
     <body>
@@ -78,18 +80,18 @@
         <div class="upage" id="mainpage" data-role="page">
             <div class="upage-outer">
 
-                <div data-role="header" class="container-group inner-element uib_w_1" data-uib="jquery_mobile/header" data-ver="0" data-theme="b">
 
-                    <h1>Near food</h1>
-                    <div class="widget-container wrapping-col single-centered"></div>
-                    <div class="upage-content content-area vertical-col left" id="page_97_14"><a class="widget uib_w_2 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="home">Accueil</a>
-                    </div>
-                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
-                </div>
-                <div class="upage-content content-area vertical-col left" id="page_97_14"><a class="widget uib_w_2 d-margins" data-uib="jquery_mobile/button" data-ver="0" data-role="button" data-icon="home">Button</a>
-                </div>
+                <div data-role="header" class="ui-header ui-bar-a" role="banner">
+					<a href="#" data-icon="home" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-left ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-text">Accueil</span></a>
+					<h1 class="ui-title" role="heading" aria-level="1">My App</h1>
+					<a href="#" class="ui-btn ui-icon-back ui-btn-icon-right ui-nodisc-icon ui-btn-inline btn_header" data-rel="back" style="background:none; color:#FFF;">Retour</a>
+				</div>
+
+
+
             </div>
         </div>
+
     </body>
 
 </html>
