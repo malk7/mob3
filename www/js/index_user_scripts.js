@@ -22,11 +22,11 @@
 });
 
           $(document).on("click", "#egypte", function(evt){
-    activate_subpage("#"); // metre après le # le nom de la sub page
+    activate_subpage("#plats"); // metre après le # le nom de la sub page
 });
 
           $(document).on("click", "#espagne", function(evt){
-    activate_subpage("#"); // metre après le # le nom de la sub page
+    activate_subpage("#plats"); // metre après le # le nom de la sub page
 });
 
           $(document).on("click", "#france", function(evt){
@@ -34,7 +34,7 @@
 });
 
           $(document).on("click", "#grece", function(evt){
-    activate_subpage("#"); // metre après le # le nom de la sub page
+    activate_subpage("#plats"); // metre après le # le nom de la sub page
 });
 
           $(document).on("click", "#japon", function(evt){
