@@ -78,7 +78,8 @@
             document.getElementById('plats').innerHTML += '<img src="' + tableauPlat.image_url + '">';
             document.getElementById('plats').innerHTML += '<h3>Ingrédients</h3>' + tableauPlat.ingredients + '<br><br>';
             document.getElementById('plats').innerHTML += '<h3>Préparation</h3>' + tableauPlat.preparation + '<br> <br>';
-            document.getElementById('plats').innerHTML += '<h3>Restaurant</h3>' + tableauPlat.restaurant + '<br> <br>';
+            document.getElementById('plats').innerHTML += '<h3>Restaurant</h3>' + tableauPlat.restaurant + '<br>';
+            document.getElementById('plats').innerHTML += '<button id="commander" style="display:block; margin:auto; margin-top:10px; margin-bottom:10px; border:none;" class="ui-btn ui-alt-icon ui-icon-search ui-btn-icon-left ui-nodisc-icon ui-btn-inline">Commander</button> <br> <br>';
             document.getElementById('plats').innerHTML += '<h3>Téléphone</h3>' + tableauPlat.telephone + '<br> <br>';
             document.getElementById('plats').innerHTML += '<h3>Adresse</h3>' + tableauPlat.adresse + '<br> <br>';
             document.getElementById('plats').innerHTML += '<h3>Description</h3>' + tableauPlat.description + '<br> </p>';
@@ -263,6 +264,10 @@
      $(document).on("click", "#Sushi_au_saumon", function(evt){
          fichePlat("Sushi au saumon");
      });
+     $(document).on("click", "#commander", function(evt){
+         alert("Commande prêt dans 30s");
+     });
+
 
 
 
