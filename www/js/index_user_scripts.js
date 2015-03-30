@@ -162,6 +162,10 @@
  */
  function register_event_handlers()
  {
+     $(document).on("click", "#accueil", function(evt){
+     activate_subpage("#uib_page_2");
+});
+
 
      $(document).on("click", "#allemagne", function(evt){
     afficheResultats("Allemagne");
