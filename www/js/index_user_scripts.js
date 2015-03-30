@@ -40,6 +40,57 @@
             console.log(tableauPlat[i].pays);
         }
 
+    function fichePlat(nomParametre) {
+        $.ajax({
+        url: 'http://greenpear.890m.com/Temp_Metier/recette_du_monde.xml',
+        dataType: 'xml',
+        success: function(data){
+
+            var tableauPlat;
+
+            $(data).find("plat").each(
+                function() {
+
+                if ($(this).find('nom').text() == nomParametre)
+                {
+                    var tableauTemp = new Object();
+
+                    tableauTemp.pays = $(this).find('pays').text();
+                    tableauTemp.nom = $(this).find('nom').text();
+                    tableauTemp.preparation = $(this).find('preparation').text();
+                    tableauTemp.ingredients = $(this).find('ingredients').text();
+                    tableauTemp.restaurant = $(this).find('restaurant').text();
+                    tableauTemp.telephone = $(this).find('telephone').text();
+                    tableauTemp.adresse = $(this).find('adresse').text();
+                    tableauTemp.description = $(this).find('description').text();
+                    tableauTemp.image_url = $(this).find('image_url').text();
+
+                    tableauPlat = tableauTemp;
+                    /*
+                    tableauPlat[cpt] = tableauTemp;
+                    cpt++;
+                    */
+                }
+            });
+
+            document.getElementById('plats').innerHTML = '<p>';
+            document.getElementById('plats').innerHTML += '<h1>' + tableauPlat.nom + '</h1>';
+            document.getElementById('plats').innerHTML += '<img src="' + tableauPlat.image_url + '">';
+            document.getElementById('plats').innerHTML += '<h3>Ingrédients</h3>' + tableauPlat.ingredients + '<br><br>';
+            document.getElementById('plats').innerHTML += '<h3>Préparation</h3>' + tableauPlat.preparation + '<br> <br>';
+            document.getElementById('plats').innerHTML += '<h3>Restaurant</h3>' + tableauPlat.restaurant + '<br> <br>';
+            document.getElementById('plats').innerHTML += '<h3>Téléphone</h3>' + tableauPlat.telephone + '<br> <br>';
+            document.getElementById('plats').innerHTML += '<h3>Adresse</h3>' + tableauPlat.adresse + '<br> <br>';
+            document.getElementById('plats').innerHTML += '<h3>Description</h3>' + tableauPlat.description + '<br> </p>';
+            activate_subpage("#plats");
+            console.log(tableauPlat.image_url);
+        },
+        error: function(data){
+            console.log('Error loading XML data');
+        }
+    });
+    }
+
     function afficheResultats(paysParametre) {
         console.log("Coucou");
 
@@ -80,14 +131,21 @@
 
             document.getElementById('listePlats').innerHTML = '<ul data-role="listview" data-split-icon="gear" data-split-theme="d">';
 
+            var str;
+            var res;
             for(var i = 0; i < tableauPlat.length; i++)
             {
+
                 console.log(tableauPlat[i].nom);
                 console.log(tableauPlat[i].image_url);
 
+                str = tableauPlat[i].nom;
+                while (str.indexOf(" ")!= -1) {
+                res = str.replace(" ", "_");
+                str = res;
+                }
                 document.getElementById('listePlats').innerHTML += '<li>' +
-                    '<a id="sousListePlat" onClick = "fichePlat(' + tableauPlat[i].nom + ')" >' +
-                    '<h3>' + tableauPlat[i].nom + '</h3> </a> </li>' ;
+                     '<a id="' + str + '"> <h3>' + tableauPlat[i].nom + '</h3></button> </li>' ;
             }
             document.getElementById('listePlats').innerHTML += '</ul>';
 
@@ -97,58 +155,6 @@
         }
     });
     }
-
-    function fichePlat(nomParametre) {
-        $.ajax({
-        url: 'http://greenpear.890m.com/Temp_Metier/recette_du_monde.xml',
-        dataType: 'xml',
-        success: function(data){
-
-            var tableauPlat;
-
-            $(data).find("plat").each(
-                function() {
-
-                if ($(this).find('nom').text() == nomParametre)
-                {
-                    var tableauTemp = new Object();
-
-                    tableauTemp.pays = $(this).find('pays').text();
-                    tableauTemp.nom = $(this).find('nom').text();
-                    tableauTemp.preparation = $(this).find('preparation').text();
-                    tableauTemp.ingredients = $(this).find('ingredients').text();
-                    tableauTemp.restaurant = $(this).find('restaurant').text();
-                    tableauTemp.telephone = $(this).find('telephone').text();
-                    tableauTemp.adresse = $(this).find('adresse').text();
-                    tableauTemp.description = $(this).find('description').text();
-                    tableauTemp.image_url = $(this).find('image_url').text();
-
-                    tableauPlat = tableauTemp;
-                    /*
-                    tableauPlat[cpt] = tableauTemp;
-                    cpt++;
-                    */
-                }
-            });
-
-            document.getElementById('plats').innerHTML = '<p>';
-            document.getElementById('plats').innerHTML += tableauPlat.nom + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.ingredients + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.preparation + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.restaurant + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.telephone + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.adresse + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.description + '<br>';
-            document.getElementById('plats').innerHTML += tableauPlat.image_url + '</p>';
-
-            activate_subpage("#plats");
-        },
-        error: function(data){
-            console.log('Error loading XML data');
-        }
-    });
-    }
-
 
  /*
    hook up event handlers
@@ -204,6 +210,60 @@
     afficheResultats("Portugal");
     activate_subpage("#listePlats"); // metre après le # le nom de la sub page
 });
+
+     $(document).on("click", "#Choucroute_garnie", function(evt){
+         fichePlat("Choucroute garnie");
+     });
+
+     $(document).on("click", "#Escalope_Viennoise", function(evt){
+         fichePlat("Escalope Viennoise");
+     });
+     $(document).on("click", "#Smorrebrod", function(evt){
+         fichePlat("Smorrebrod");
+     });
+     $(document).on("click", "#Paella", function(evt){
+         fichePlat("Paella");
+     });
+     $(document).on("click", "#Fondue_Savoyarde", function(evt){
+         fichePlat("Fondue Savoyarde");
+     });
+     $(document).on("click", "#Tartiflette", function(evt){
+         fichePlat("Tartiflette");
+     });
+     $(document).on("click", "#Quiche_Lorraine", function(evt){
+         fichePlat("Quiche Lorraine");
+     });
+     $(document).on("click", "#Moussaka", function(evt){
+         fichePlat("Moussaka");
+     });
+     $(document).on("click", "#Lasagnes", function(evt){
+         fichePlat("Lasagnes");
+     });
+     $(document).on("click", "#Cozido", function(evt){
+         fichePlat("Cozido");
+     });
+     $(document).on("click", "#Ful_Medames", function(evt){
+         fichePlat("Ful Medames");
+     });
+     $(document).on("click", "#Koshari", function(evt){
+         fichePlat("Koshari");
+     });
+     $(document).on("click", "#Tajine", function(evt){
+         fichePlat("Tajine");
+     });
+     $(document).on("click", "#Fajitas", function(evt){
+         fichePlat("Fajitas");
+     });
+     $(document).on("click", "#Riz_cantonnais", function(evt){
+         fichePlat("Riz cantonnais");
+     });
+     $(document).on("click", "#Boeuf_aux_oignons", function(evt){
+         fichePlat("Boeuf aux oignons");
+     });
+     $(document).on("click", "#Sushi_au_saumon", function(evt){
+         fichePlat("Sushi au saumon");
+     });
+
 
 
     }
